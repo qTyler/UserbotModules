@@ -4,6 +4,7 @@
 
 from .. import loader, utils
 from telethon.tl.types import Message
+from telethon import utils.get_display_name
 import datetime
 from time import strftime
 import pprint
@@ -13,7 +14,7 @@ class GenUL(loader.Module):
     """Генерация списка пользователей"""
 
     strings = {'name': 'GenUserList'}
-    
+
     @loader.owner
     async def sglcmd(self, m: Message):
         """<reply> - нужно ответить на сообщение с которого будет начинаться парсинг пользователей
@@ -43,7 +44,7 @@ class GenUL(loader.Module):
                 if max_users == c: break
                 try:
                     if msg.text.lower() in symbols_add:
-                        user = utils.get_display_name(msg.sender)
+                        user = get_display_name(msg.sender)
                         if msg.sender == None:
                             user = msg.post_author
                             #uid = 0
