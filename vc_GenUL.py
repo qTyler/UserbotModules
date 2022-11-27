@@ -27,8 +27,8 @@ class GenUL(loader.Module):
             '👍'
         ]
         if not m.chat:
-            await m.edit('m: {}'.format(pprint.pprint(m)))
-            return await m.edit("<b>Это не чат</b>")
+            return await m.edit('m: {}'.format(pprint.pprint(m)))
+            #return await m.edit("<b>Это не чат</b>")
 
         usrlist = []
         reply = await m.get_reply_message()
