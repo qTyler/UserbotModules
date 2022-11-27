@@ -14,7 +14,7 @@ class GenUL(loader.Module):
     strings = {'name': 'GenUserList'}
     
     @loader.owner
-    async def sglcmd(self, m):
+    async def sglcmd(self, m: Message):
         """<reply> - нужно ответить на сообщение с которого будет начинаться парсинг пользователей
         [max_users] - максимальное количество пользователей в списке, по умолчанию: 30"""
             
