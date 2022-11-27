@@ -40,7 +40,7 @@ class GenUL(loader.Module):
             return await m.edit("бля")
         else:
             c = 0
-            async for msg in m.client.iter_messages(m.chat.id, offset_id = reply.id, reverse=True, limit = 400):
+            async for msg in m.client.iter_messages(chatid, offset_id = reply.id, reverse=True, limit = 400):
                 if max_users == c: break
                 try:
                     if msg.text.lower() in symbols_add:
@@ -51,12 +51,12 @@ class GenUL(loader.Module):
                         else:
                             uid = msg.sender.id
                         if not user: user = m.chat.title
-                        if not user in userlist:
+                        if not user in usrlist:
                             c += 1
-                            userlist.append(user)
+                            usrlist.append(user)
                 except TypeError: continue
-                except NameError: userlist.append('* Аноним без должности')
+                except NameError: usrlist.append('* Аноним без должности')
                 #userlist.append('{}. {}\n'.format(c, user))
                 
-        await message.edit(pprint.pprint(userlist))     
+        await message.edit(pprint.pprint(usrlist))     
                     
