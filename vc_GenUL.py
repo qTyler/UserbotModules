@@ -3,6 +3,7 @@
 # meta developer: @VacuumCleanr
 
 from .. import loader, utils
+from telethon.tl.types import Message
 import datetime
 from time import strftime
 import pprint
@@ -26,8 +27,10 @@ class GenUL(loader.Module):
             '➕',
             '👍'
         ]
+
+        chatid = utils.get_chat_id(m)
         if not m.chat:
-            return await m.edit('m: {}'.format(pprint.pprint(m)))
+            return await m.edit('m.chat: {}'.format(chatid))
             #return await m.edit("<b>Это не чат</b>")
 
         usrlist = []
