@@ -58,5 +58,5 @@ class GenUL(loader.Module):
                 except NameError: usrlist.append('* Аноним без должности')
                 #userlist.append('{}. {}\n'.format(c, user))
                 
-        await message.edit(pprint.pprint(usrlist))     
+        await m.edit(pprint.pprint(usrlist))     
                     
