@@ -18,7 +18,7 @@ class GenUL(loader.Module):
     async def listview(self, list):
         i = 0
         cusers = len(list)
-        listview = f'🧑‍💻 <b>Список участников</b> / {cusers}!\n\n'
+        listview = f'🧑‍💻 <b>Список участников</b> / {cusers}!\n⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶\n\n'
         for user in list:
            i += 1
            if cusers == i: # footer
