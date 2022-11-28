@@ -59,16 +59,17 @@ class GenUL(loader.Module):
                         user = get_display_name(msg.sender)
                         if msg.sender == None:
                             user = msg.post_author
-                            #uid = 0
+                            uid = 0
                         else:
                             uid = msg.sender.id
                         if not user: user = m.chat.title
                         if not user in usrlist:
-                            c += 1
+                            c += 1 
                             usrlist.append(user)
                 except TypeError: continue
-                except NameError: usrlist.append('* Аноним без должности')
-                #userlist.append('{}. {}\n'.format(c, user))
+                except NameError:
+                    c += 1
+                    usrlist.append('* Аноним без должности')
                 
-        await utils.answer(m, listview(usrlist))     
+        await utils.answer(m, self.listview(usrlist))     
                     
