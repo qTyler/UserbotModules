@@ -14,20 +14,20 @@ class GenUL(loader.Module):
     """Генерация списка участников"""
 
     strings = {'name': 'GenUserList'}
-    
+  
     async def listview(self, list):
         i = 0
         cusers = len(list)
-        listview = f'🧑‍💻 [{cusers}] <b>Список участников</b>!\n⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶\n'
+        listview = f'🧑‍💻 [@] <b>Количество чел: </b>{cusers}!\n⊶⊷⊶⊷⊶⊷⊶\n ╭︎ '
         for user in list:
            i += 1
            if cusers == i: # footer
-              listview += f'<b>📌{i}</b>. {user}\n'
+              listview += f' ╰︎ <b>{i}</b>. {user}\n'
            else: # middle 
-              listview += f'<b>{i}</b>. {user}\n'
+              listview += f' ├︎ <b>{i}</b>. {user}\n'
         return listview   
     
-    @loader.owner
+    @loader.group_admin
     async def ulcmd(self, m: Message):
         """<reply> - нужно ответить на сообщение с которого будет начинаться парсинг пользователей
              [max_users] - максимальное количество пользователей в списке, по умолчанию: 30"""
