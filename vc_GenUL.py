@@ -11,14 +11,14 @@ import pprint
 
 @loader.tds
 class GenUL(loader.Module):
-    """Генерация списка пользователей"""
+    """Генерация списка участников"""
 
     strings = {'name': 'GenUserList'}
     
     async def listview(self, list):
         i = 0
         cusers = len(list)
-        listview = f'🧑‍💻 <b>Список участников</b> / {cusers}!\n⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶\n\n'
+        listview = f'🧑‍💻 [{cusers}] <b>Список участников</b>!\n⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶\n'
         for user in list:
            i += 1
            if cusers == i: # footer
@@ -38,13 +38,20 @@ class GenUL(loader.Module):
             'plus',
             'плюс',
             '➕',
-            '👍'
+            '👍',
+            '✔️',
+            '✅',
+            '☑️'
         ]
 
+        args = utils.get_args(m)
         chatid = utils.get_chat_id(m)
+        if args:
+            try: max_users = int(args[0])
+            except ValueError: pass
+
         if not m.chat:
-            return await m.edit('m.chat: {}'.format(chatid))
-            #return await m.edit("<b>Это не чат</b>")
+            return await m.edit("<b>Это не чат</b>")
 
         usrlist = []
         reply = await m.get_reply_message()
