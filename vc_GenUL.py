@@ -28,7 +28,7 @@ class GenUL(loader.Module):
         return listview   
     
     @loader.owner
-    async def sglcmd(self, m: Message):
+    async def ulcmd(self, m: Message):
         """<reply> - нужно ответить на сообщение с которого будет начинаться парсинг пользователей
         [max_users] - максимальное количество пользователей в списке, по умолчанию: 30"""
             
