@@ -15,7 +15,7 @@ class GenUL(loader.Module):
 
     strings = {'name': 'GenUserList'}
     
-    def listview(list):
+    def listview(self, list):
         i = 0
         cusers = len(list)
         listview = f'-- <b>Халявщиков найдено: {cusers}!</b> --\n\n'
