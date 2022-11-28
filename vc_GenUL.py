@@ -15,7 +15,7 @@ class GenUL(loader.Module):
 
     strings = {'name': 'GenUserList'}
     
-    def listview(self, list):
+    async def listview(self, list):
         i = 0
         cusers = len(list)
         listview = f'-- <b>Халявщиков найдено: {cusers}!</b> --\n\n'
@@ -71,5 +71,5 @@ class GenUL(loader.Module):
                     c += 1
                     usrlist.append('* Аноним без должности')
                 
-        await utils.answer(m, self.listview(usrlist))     
+        await utils.answer(m, await self.listview(usrlist))     
                     
