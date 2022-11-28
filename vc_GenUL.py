@@ -14,7 +14,19 @@ class GenUL(loader.Module):
     """Генерация списка пользователей"""
 
     strings = {'name': 'GenUserList'}
-
+    
+    def listview(list):
+        i = 0
+        cusers = len(list)
+        listview = f'-- <b>Халявщиков найдено: {cusers}!</b> --\n\n'
+        for user in list:
+           i += 1
+           if cusers == i: # footer
+              listview += f'<b>📌{i}</b>. {user}\n'
+           else: # middle 
+              listview += f'<b>{i}</b>. {user}\n'
+        return listview   
+    
     @loader.owner
     async def sglcmd(self, m: Message):
         """<reply> - нужно ответить на сообщение с которого будет начинаться парсинг пользователей
@@ -58,5 +70,5 @@ class GenUL(loader.Module):
                 except NameError: usrlist.append('* Аноним без должности')
                 #userlist.append('{}. {}\n'.format(c, user))
                 
-        await utils.answer(m, str(usrlist))     
+        await utils.answer(m, listview(usrlist))     
                     
