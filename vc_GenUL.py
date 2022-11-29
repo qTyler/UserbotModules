@@ -14,26 +14,28 @@ class GenUL(loader.Module):
     """Генерация списка участников"""
 
     strings = {'name': 'GenUserList'}
-    
+  
     async def listview(self, list):
         i = 0
         cusers = len(list)
-        listview = f'🧑‍💻 [{cusers}] <b>Список участников</b>!\n⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶\n'
+        listview = f'🧑‍💻 [@] <b>Количество чел: </b>{cusers}!\n⊶⊷⊶⊷⊶⊷⊶\n ╭︎ '
+        if cusers < 3: return '💬 <b>Количество участников должно быть не меньше трех</b>‼️'
         for user in list:
            i += 1
-           if cusers == i: # footer
-              listview += f'<b>📌{i}</b>. {user}\n'
-           else: # middle 
-              listview += f'<b>{i}</b>. {user}\n'
+           if cusers == i: listview += f' ╰︎ <b>{i}</b>. {user}\n' # footer
+           else: listview += f' ├︎ <b>{i}</b>. {user}\n' # middle 
         return listview   
     
-    @loader.group_admin
+    @loader.group_admin(only_groups=True)
     async def ulcmd(self, m: Message):
         """<reply> - нужно ответить на сообщение с которого будет начинаться парсинг пользователей
              [max_users] - максимальное количество пользователей в списке, по умолчанию: 30
-            * Для участия в отборе необходимо отправить один из следующих слов/символов: «+», «plus», «плюс», «➕»,
-            «👍», «✔️», «✅», «☑️»
-        """
+        
+             * Для участия в отборе необходимо отправить 
+                 Один из следующих эмодзи/символов/слов: 
+                 «+», «plus», «плюс», «➕», 
+                 «👍», «✔️», «✅», «☑️»
+        """    
         max_users = 30 #default
         symbols_add = [
             '+',
@@ -46,7 +48,6 @@ class GenUL(loader.Module):
             '☑️'
         ]
 
-        symadd = '/'.join(symbols_add) 
         args = utils.get_args(m)
         chatid = utils.get_chat_id(m)
         if args:
@@ -81,4 +82,5 @@ class GenUL(loader.Module):
                     c += 1
                     usrlist.append('* Аноним без должности')
                 
-        await utils.answer(m, await self.listview(usrlist))
+        await utils.answer(m, await self.listview(usrlist))     
+                    
