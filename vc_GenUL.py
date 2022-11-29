@@ -22,10 +22,30 @@ class GenUL(loader.Module):
         if cusers < 3: return '💬 <b>Количество участников должно быть не меньше трех</b>‼️'
         for user in list:
            i += 1
-           if cusers == i: listview += f' ╰︎ <b>{i}</b>. {user}\n' # footer
+           if i == 1: listview += f' <b>{i}</b>. {user}\n'
+           elif cusers == i: listview += f' ╰︎ <b>{i}</b>. {user}\n' # footer
            else: listview += f' ├︎ <b>{i}</b>. {user}\n' # middle 
         return listview   
     
+    @loader.owner
+    async def viewcmd(self, m: Message):
+        users = [
+            '🇻 🇱 🇦 🇬 🇦',
+            'ḊḕṁṏṆ',
+            'КлАуС',
+            '🅚🅞🅡🅞🅛❤️👑 (🅟🅐🅝🅘🅚🅐)',
+            '𝖓𝖔 𝖓𝖆𝖒𝖊',
+            '<ОпТИмУс>',
+            'G̴O̴D̴⚡️BL̴E̴S̴S̴',
+            'ⲊⳲⲞⲨⲀ Ⳳ ⲆⲞⲊⲔⳘ',
+            'Milky Way',
+            '🕷️',
+            'ツ ×очУ ЛЯм $ ツ',
+            '𝙴𝑐тъ 𐌐p๏𝟼uƬue'
+        ]
+        
+        await utils.answer(m, await self.listview(users))
+        
     @loader.group_admin
     async def ulcmd(self, m: Message):
         """<reply> - нужно ответить на сообщение с которого будет начинаться парсинг пользователей
