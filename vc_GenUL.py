@@ -14,26 +14,25 @@ class GenUL(loader.Module):
     """Генерация списка участников"""
 
     strings = {'name': 'GenUserList'}
-    
+  
     async def listview(self, list):
         i = 0
         cusers = len(list)
-        listview = f'🧑‍💻 [{cusers}] <b>Список участников</b>!\n⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶\n'
+        listview = f'🧑‍💻 [@] <b>Количество чел: </b>{cusers}!\n⊶⊷⊶⊷⊶⊷⊶\n ╭︎ '
         for user in list:
            i += 1
            if cusers == i: # footer
-              listview += f'<b>📌{i}</b>. {user}\n'
+              listview += f' ╰︎ <b>{i}</b>. {user}\n'
            else: # middle 
-              listview += f'<b>{i}</b>. {user}\n'
+              listview += f' ├︎ <b>{i}</b>. {user}\n'
         return listview   
     
     @loader.group_admin
-    async def ulcmd(self, m: Message):
+    @loader.command(only_messages=True, only_groups=True)
+    async def 🏴‍☠️(self, m: Message): #ulcmd
         """<reply> - нужно ответить на сообщение с которого будет начинаться парсинг пользователей
-             [max_users] - максимальное количество пользователей в списке, по умолчанию: 30
-            * Для участия в отборе необходимо отправить один из следующих слов/символов: «+», «plus», «плюс», «➕»,
-            «👍», «✔️», «✅», «☑️»
-        """
+             [max_users] - максимальное количество пользователей в списке, по умолчанию: 30"""
+            
         max_users = 30 #default
         symbols_add = [
             '+',
@@ -46,7 +45,6 @@ class GenUL(loader.Module):
             '☑️'
         ]
 
-        symadd = '/'.join(symbols_add) 
         args = utils.get_args(m)
         chatid = utils.get_chat_id(m)
         if args:
@@ -81,4 +79,5 @@ class GenUL(loader.Module):
                     c += 1
                     usrlist.append('* Аноним без должности')
                 
-        await utils.answer(m, await self.listview(usrlist))
+        await utils.answer(m, await self.listview(usrlist))     
+                    
