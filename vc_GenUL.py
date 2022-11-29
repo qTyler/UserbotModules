@@ -19,6 +19,7 @@ class GenUL(loader.Module):
         i = 0
         cusers = len(list)
         listview = f'🧑‍💻 [@] <b>Количество чел: </b>{cusers}!\n⊶⊷⊶⊷⊶⊷⊶\n ╭︎ '
+        if cusers < 3: return '💬 <b>Список участников не может содержать меньше 3 пользователей!</b>'
         for user in list:
            i += 1
            if cusers == i: # footer
@@ -27,7 +28,7 @@ class GenUL(loader.Module):
               listview += f' ├︎ <b>{i}</b>. {user}\n'
         return listview   
     
-    @loader.group_admin
+    @loader.group_admin(only_groups=True)
     async def ulcmd(self, m: Message):
         """<reply> - нужно ответить на сообщение с которого будет начинаться парсинг пользователей
              [max_users] - максимальное количество пользователей в списке, по умолчанию: 30
