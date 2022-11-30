@@ -27,20 +27,21 @@ class GenUL(loader.Module):
            else: listview += f' ├︎ <b>{i}</b>. {user}\n' # middle 
         return listview   
         
-    async def debcmd(self, m: Message):
-        """ Test function command ;) """
-        args = utils.get_args(m)
-        return await utils.answer(m, str(args))
+    #async def debcmd(self, m: Message):
+    #    """ Test function command ;) """
+    #    args = utils.get_args(m)
+    #    return await utils.answer(m, str(args))
         
     @loader.support
     async def ulcmd(self, m: Message):
         """<reply> - нужно ответить на сообщение с которого будет начинаться парсинг пользователей
-           [-t] - тестовый вывод участников (не нужно отвечать на сообщение)
            [max_users] - максимальное количество пользователей в списке, по умолчанию: 30
            
            ‼️ Для участия в отборе необходимо отправить одну из следующих команд: 
              «+», «plus», «плюс», «➕», «👍», «✔️», «✅», «☑️»
         """    
+        #[-t] - тестовый вывод участников (не нужно отвечать на сообщение)
+        
         max_users = 30 #default
         symbols_add = [
             '+',
