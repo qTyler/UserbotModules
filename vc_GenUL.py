@@ -18,7 +18,7 @@ class GenUL(loader.Module):
     async def listview(self, list):
         i = 0
         cusers = len(list)
-        listview = f'🧑‍💻 [@] <b>Найдено участников: </b>{cusers}!\n⊶⊷⊶⊷⊶⊷⊶\n ╭︎ 📃 Список участников:\n'
+        listview = f'🧑‍💻 [@] <b>Найдено 👥: </b>{cusers}!\n⊶⊷⊶⊷⊶⊷⊶\n ╭︎ 🗂 <b>Список участников:</b>\n'
         #if cusers < 3: return '💬 <b>Количество участников должно быть не меньше трех</b>‼️'
         for user in list:
            i += 1
@@ -39,9 +39,7 @@ class GenUL(loader.Module):
            
            ‼️ Для участия в отборе необходимо отправить одну из следующих команд: 
              «+», «plus», «плюс», «➕», «👍», «✔️», «✅», «☑️»
-        """    
-        #[-t] - тестовый вывод участников (не нужно отвечать на сообщение)
-        
+        """        
         max_users = 30 #default
         symbols_add = [
             '+',
@@ -53,52 +51,19 @@ class GenUL(loader.Module):
             '✅',
             '☑️'
         ]
-        
-        test_users = [
-            '🇻 🇱 🇦 🇬 🇦',
-            'ḊḕṁṏṆ',
-            'КлАуС',
-            '🅚🅞🅡🅞🅛❤️👑 (🅟🅐🅝🅘🅚🅐)',
-            '𝖓𝖔 𝖓𝖆𝖒𝖊',
-            '<ОпТИмУс>',
-            'G̴O̴D̴⚡️BL̴E̴S̴S̴',
-            'ⲊⳲⲞⲨⲀ Ⳳ ⲆⲞⲊⲔⳘ',
-            'Milky Way',
-            '🕷️',
-            'ツ ×очУ ЛЯм $ ツ',
-            '𝙴𝑐тъ 𐌐p๏𝟼uƬue',
-            'Кирилл Gaviria',
-            '𝙃𝙡𝙡𝙖𝙂𝙨𝙞𝙠',
-            'ⲊⳲⲞⲨⲀ Ⳳ ⲆⲞⲊⲔⳘ',
-            'кристи',
-            '♡ Ⓟⓡⓘⓝⓣⓢⓔⓢⓢⓐ ♡',
-            '𝕊𝕚𝕞𝕠𝕟',
-            '𐌉ᱬᱬᱛ𐍂ተ𐌳𑀉𐌉ተ𐍅',
-            'gOLD',
-            'решала',
-            'В̽е©ель̲4аk',
-            'Frea',
-            'Наша няша',
-            'Иваныч'
-        ]
-        
+          
         usrlist = []
         args = utils.get_args(m)
         chatid = utils.get_chat_id(m)
         if args:
             try: max_users = int(args[0])
-            except ValueError: 
-                if str(args[0]) == '-t':
-                    usrlist = test_users
+            except ValueError: pass
 
         if not m.chat:
             return await m.edit("<b>Это не чат</b>")
 
         reply = await m.get_reply_message()
-        if not reply:
-            if len(usrlist) > 5:
-                return await utils.answer(m, await self.listview(usrlist))
-            return await m.edit("бля")
+        if not reply: return await m.edit("бля")
         else:
             c = 0
             lastmsg = []
@@ -118,7 +83,7 @@ class GenUL(loader.Module):
                             c += 1 
                             usrlist.append(user)
                             
-                except AttributeError: continue #await utils.answer(m, pprint.pprint(lastmsg)) #await utils.answer(m, lastmsg)
+                except AttributeError: continue
                 except TypeError: continue
                 except NameError:
                     c += 1
