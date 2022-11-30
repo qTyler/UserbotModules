@@ -19,20 +19,13 @@ class GenUL(loader.Module):
         i = 0
         cusers = len(list)
         listview = f'🧑‍💻 [@] <b>Найдено 👥: </b>{cusers}!\n⊶⊷⊶⊷⊶⊷⊶\n ╭︎ 🗂 <b>Список участников:</b>\n'
-        #if cusers < 3: return '💬 <b>Количество участников должно быть не меньше трех</b>‼️'
         for user in list:
            i += 1
-           #if i == 1: listview += f' <b>{i}</b>. {user}\n'
            if cusers == i: listview += f' ╰︎ <b>{i}</b>. {user}\n' # footer
            else: listview += f' ├︎ <b>{i}</b>. {user}\n' # middle 
         return listview   
         
-    #async def debcmd(self, m: Message):
-    #    """ Test function command ;) """
-    #    args = utils.get_args(m)
-    #    return await utils.answer(m, str(args))
-        
-    @loader.support
+    @loader.unrestricted
     async def ulcmd(self, m: Message):
         """<reply> - нужно ответить на сообщение с которого будет начинаться парсинг пользователей
            [max_users] - максимальное количество пользователей в списке, по умолчанию: 30
