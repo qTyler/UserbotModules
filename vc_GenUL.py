@@ -31,7 +31,8 @@ class GenUL(loader.Module):
     async def ulcmd(self, m: Message):
         """<reply> - нужно ответить на сообщение с которого будет начинаться парсинг пользователей
              [max_users] - максимальное количество пользователей в списке, по умолчанию: 30
-             [--test_view] - тестовый вывод участников
+           [-t] - тестовый вывод участников
+             
              * Для участия в отборе необходимо отправить одну из следующих команд: 
                  «+», «plus», «плюс», «➕», 
                  «👍», «✔️», «✅», «☑️»
@@ -76,18 +77,22 @@ class GenUL(loader.Module):
             'Иваныч'
         ]
         
+        usrlist = []
         args = utils.get_args(m)
         chatid = utils.get_chat_id(m)
         if args:
             try: max_users = int(args[0])
-            except ValueError: pass
+            except ValueError: 
+                if str(args[0]) == '-t':
+                    usrlist = test_users
 
         if not m.chat:
             return await m.edit("<b>Это не чат</b>")
 
-        usrlist = []
         reply = await m.get_reply_message()
         if not reply:
+            if len(usrlist) > 5:
+                return await utils.answer(m, await self.listview(usrlist))
             return await m.edit("бля")
         else:
             c = 0
