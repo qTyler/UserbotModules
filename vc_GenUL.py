@@ -118,8 +118,7 @@ class GenUL(loader.Module):
                             c += 1 
                             usrlist.append(user)
                             
-                except AttributeError: await utils.answer(m, pprint.pprint(lastmsg))
-                    #await utils.answer(m, lastmsg)
+                except AttributeError: continue #await utils.answer(m, pprint.pprint(lastmsg)) #await utils.answer(m, lastmsg)
                 except TypeError: continue
                 except NameError:
                     c += 1
