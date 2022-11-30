@@ -104,7 +104,7 @@ class GenUL(loader.Module):
             lastmsg = []
             async for msg in m.client.iter_messages(chatid, offset_id = reply.id, reverse=True, limit = 400):
                 if max_users == c: break
-                last_msg = msg
+                lastmsg = msg
                 try:
                     if str(msg.text) in symbols_add:
                         user = get_display_name(msg.sender)
@@ -118,12 +118,8 @@ class GenUL(loader.Module):
                             c += 1 
                             usrlist.append(user)
                             
-                except AttributeError: await utils.answer(
-                    m,
-                    "<code>"
-                    + lastmsg
-                    + "</code>",
-                )
+                except AttributeError: await utils.answer(m, pprint.pprint(lastmsg))
+                    #await utils.answer(m, lastmsg)
                 except TypeError: continue
                 except NameError:
                     c += 1
