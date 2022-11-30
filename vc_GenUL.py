@@ -27,14 +27,19 @@ class GenUL(loader.Module):
            else: listview += f' ├︎ <b>{i}</b>. {user}\n' # middle 
         return listview   
         
+    async def debcmd(self, m: Message):
+        """ Test function command ;) """
+        args = utils.get_args(m)
+        return await utils.answer(m, str(args))
+        
     @loader.support
     async def ulcmd(self, m: Message):
         """<reply> - нужно ответить на сообщение с которого будет начинаться парсинг пользователей
-             [max_users] - максимальное количество пользователей в списке, по умолчанию: 30
            [-t] - тестовый вывод участников (не нужно отвечать на сообщение)
-             
-             * Для участия в отборе необходимо отправить одну из следующих команд: 
-              «+», «plus», «плюс», «➕», «👍», «✔️», «✅», «☑️»
+           [max_users] - максимальное количество пользователей в списке, по умолчанию: 30
+           
+           ‼️ Для участия в отборе необходимо отправить одну из следующих команд: 
+             «+», «plus», «плюс», «➕», «👍», «✔️», «✅», «☑️»
         """    
         max_users = 30 #default
         symbols_add = [
@@ -98,7 +103,7 @@ class GenUL(loader.Module):
             async for msg in m.client.iter_messages(chatid, offset_id = reply.id, reverse=True, limit = 400):
                 if max_users == c: break
                 try:
-                    if msg.text.lower() in symbols_add:
+                    if str(msg.text) in symbols_add:
                         user = get_display_name(msg.sender)
                         if msg.sender == None:
                             user = msg.post_author
