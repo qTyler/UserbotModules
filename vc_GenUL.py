@@ -120,7 +120,7 @@ class GenUL(loader.Module):
                 except AttributeError: await utils.answer(
                     m,
                     "<code>"
-                    + utils.escape_html(lastmsg.stringify())
+                    + lastmsg
                     + "</code>",
                 )
                 except TypeError: continue
