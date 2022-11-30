@@ -13,7 +13,7 @@ import pprint
 class GenUL(loader.Module):
     """Генерация списка участников"""
 
-    strings = {'name': 'GenUserList'}
+    strings = {'name': 'UserTools'}
   
     async def listview(self, list):
         i = 0
