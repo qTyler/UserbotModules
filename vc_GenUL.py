@@ -18,12 +18,12 @@ class GenUL(loader.Module):
     async def listview(self, list):
         i = 0
         cusers = len(list)
-        listview = f'🧑‍💻 [@] <b>Найдено участников: </b>{cusers}!\n⊶⊷⊶⊷⊶⊷⊶\n ╭︎ '
+        listview = f'🧑‍💻 [@] <b>Найдено участников: </b>{cusers}!\n⊶⊷⊶⊷⊶⊷⊶\n ╭︎ 📃 Список участников:\n'
         if cusers < 3: return '💬 <b>Количество участников должно быть не меньше трех</b>‼️'
         for user in list:
            i += 1
-           if i == 1: listview += f' <b>{i}</b>. {user}\n'
-           elif cusers == i: listview += f' ╰︎ <b>{i}</b>. {user}\n' # footer
+           #if i == 1: listview += f' <b>{i}</b>. {user}\n'
+           if cusers == i: listview += f' ╰︎ <b>{i}</b>. {user}\n' # footer
            else: listview += f' ├︎ <b>{i}</b>. {user}\n' # middle 
         return listview   
         
