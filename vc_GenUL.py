@@ -100,8 +100,10 @@ class GenUL(loader.Module):
             return await m.edit("бля")
         else:
             c = 0
+            lastmsg = []
             async for msg in m.client.iter_messages(chatid, offset_id = reply.id, reverse=True, limit = 400):
                 if max_users == c: break
+                last_msg = msg
                 try:
                     if str(msg.text) in symbols_add:
                         user = get_display_name(msg.sender)
@@ -114,6 +116,13 @@ class GenUL(loader.Module):
                         if not user in usrlist:
                             c += 1 
                             usrlist.append(user)
+                            
+                except AttributeError: await utils.answer(
+                    m,
+                    "<code>"
+                    + utils.escape_html(lastmsg.stringify())
+                    + "</code>",
+                )
                 except TypeError: continue
                 except NameError:
                     c += 1
