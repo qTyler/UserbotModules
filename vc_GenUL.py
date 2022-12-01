@@ -22,7 +22,7 @@ class GenUL(loader.Module):
         
         from telethon.tl.types import ChannelParticipantsAdmins
         from asyncio import sleep
-        for user in m.client.iter_participants(chatid, filter=ChannelParticipantsAdmins):
+        async for user in m.client.iter_participants(chatid, filter=ChannelParticipantsAdmins):
             await utils.answer(m, '<code>{0}</code>'.format(user.stringify()))    
             await sleep(10)
             
