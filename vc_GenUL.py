@@ -13,7 +13,7 @@ import pprint
 class GenUL(loader.Module):
     """Инструменты для работы с пользователями"""
 
-    strings = {'name': 'UserTools'}
+    strings = {'name': 'VacuumClnr.Tools'}
   
     async def listview(self, list):
         i = 0
