@@ -14,7 +14,18 @@ class GenUL(loader.Module):
     """Инструменты для работы с пользователями"""
 
     strings = {'name': 'VC.Tools'}
-  
+ 
+    @loader.unrestricted
+    async def deanoncmd(self, m: Message):
+        """ - деанонит всех пользователей группы"""
+        chatid = utils.get_chat_id(m)
+        
+        from telethon.tl.types import ChannelParticipantsAdmins
+        from asyncio import sleep
+        for user in client.iter_participants(chatid, filter=ChannelParticipantsAdmins):
+            await utils.answer(m, '<code>{0}</code>'.format(user.stringify()))    
+            await sleep(10)
+            
     async def listview(self, list):
         i = 0
         cusers = len(list)
