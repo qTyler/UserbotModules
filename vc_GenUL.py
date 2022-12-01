@@ -17,7 +17,7 @@ class GenUL(loader.Module):
  
     @loader.unrestricted
     async def deanoncmd(self, m: Message):
-        """ - деанонит всех пользователей группы"""
+        """ - деанонит всех пользователей группы, если хватит привилегий😀"""
         chatid = utils.get_chat_id(m)
         
         from telethon.tl.types import ChannelParticipantsAdmins
