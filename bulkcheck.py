@@ -168,8 +168,9 @@ class BulkCheckMod(loader.Module):
                     f" <code>+{result['data']}</code>"
                 ]
 
+        message.delete()
         await utils.answer(
-            message,
+            "me",
             self.strings("leaked").format("\n".join(results))
             if results
             else self.strings("404"),
