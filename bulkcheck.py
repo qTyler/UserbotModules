@@ -169,7 +169,7 @@ class BulkCheckMod(loader.Module):
                 ]
 
         await message.delete()
-        await utils.answer(
+        await message.client.send_message(
             "me",
             self.strings("leaked").format("\n".join(results))
             if results
