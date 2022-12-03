@@ -168,7 +168,7 @@ class BulkCheckMod(loader.Module):
                     f" <code>+{result['data']}</code>"
                 ]
 
-        message.delete()
+        await message.delete()
         await utils.answer(
             "me",
             self.strings("leaked").format("\n".join(results))
