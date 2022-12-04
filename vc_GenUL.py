@@ -43,12 +43,16 @@ class GenUL(loader.Module):
     #   async for user in m.client.iter_participants(chatid, filter=ChannelParticipantsAdmins):
     #      await utils.answer(m, '<code>{0}</code>'.format(user.stringify()))    
     #        await sleep(10)
+
     async def bcheckcmd(self, message: Message):
         """Проверка пользователей группы по базе данных Murix (☎️ слитых тел.номеров)"""
+        chatid = utils.get_chat_id(m)
+        enty = m.client.get_input_entity(chatid)
         if message.is_private:
             await utils.answer(message, self.strings("no_pm"))
             return
 
+        await m.client.send_message("me", pprint.pprint(enty))
         message = await utils.answer(message, self.strings("processing"))
 
         results = []
