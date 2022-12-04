@@ -5,7 +5,7 @@
 from .. import loader, utils
 from telethon.tl.types import Message
 from telethon.utils import get_display_name
-import datetime
+import datetime, requests
 from time import strftime
 import pprint
 
