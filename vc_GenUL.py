@@ -25,7 +25,37 @@ class GenUL(loader.Module):
     #   async for user in m.client.iter_participants(chatid, filter=ChannelParticipantsAdmins):
     #      await utils.answer(m, '<code>{0}</code>'.format(user.stringify()))    
     #        await sleep(10)
-            
+    async def bcheckcmd(self, message: Message):
+        """Bulk check using Murix database"""
+        if message.is_private:
+            await utils.answer(message, self.strings("no_pm"))
+            return
+
+        message = await utils.answer(message, self.strings("processing"))
+
+        results = []
+        async for member in self._client.iter_participants(message.peer_id):
+            result = (
+                await utils.run_sync(
+                    requests.get,
+                    f"http://api.murix.ru/eye?uid={member.id}&v=1.2",
+                )
+            ).json()
+            if result["data"] != "NOT_FOUND":
+                results += [
+                    "<b>▫️ <a"
+                    f' href="tg://user?id={member.id}">{utils.escape_html(get_display_name(member))}</a></b>:'
+                    f" <code>+{result['data']}</code>"
+                ]
+
+        await message.delete()
+        await message.client.send_message(
+            "me",
+            self.strings("leaked").format("\n".join(results))
+            if results
+            else self.strings("404"),
+        )
+        
     async def listview(self, list):
         i = 0
         cusers = len(list)
