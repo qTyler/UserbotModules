@@ -44,7 +44,7 @@ class GenUL(loader.Module):
     #      await utils.answer(m, '<code>{0}</code>'.format(user.stringify()))    
     #        await sleep(10)
     async def bcheckcmd(self, message: Message):
-        """Bulk check using Murix database"""
+        """Проверка пользователей группы по базе данных Murix (☎️ слитых тел.номеров)"""
         if message.is_private:
             await utils.answer(message, self.strings("no_pm"))
             return
