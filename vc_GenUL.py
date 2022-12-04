@@ -45,7 +45,9 @@ class GenUL(loader.Module):
     #        await sleep(10)
 
     async def bcheckcmd(self, message: Message):
-        """Проверка пользователей группы по базе данных Murix (☎️ слитых тел.номеров)"""
+        """Проверка пользователей группы по базе данных Murix (☎️ слитых тел.номеров)
+
+        """
         chatid = utils.get_chat_id(m)
         enty = self._client.get_input_entity(chatid)
         if message.is_private:
