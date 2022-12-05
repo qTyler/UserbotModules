@@ -23,8 +23,8 @@ class GenUL(loader.Module):
             " выполнять в чате</b>"
         ),
         "leaked": (
-            "<emoji document_id=5465169893580086142>☎️</emoji> <b>Слитые номера в этом"
-            " чате:</b>\n\n{}"
+            "<emoji document_id=5465169893580086142>☎️</emoji>[<code>{}</code>] <b>Слитые номера в "
+            " чате «{}»:</b>\n\n{}"
         ),
         "404": (
             "<emoji document_id=5465325710698617730>☹️</emoji> <b>Тут нет слитых"
@@ -44,8 +44,8 @@ class GenUL(loader.Module):
     #      await utils.answer(m, '<code>{0}</code>'.format(user.stringify()))    
     #        await sleep(10)
 
-    async def bcheckcmd(self, message: Message):
-        """Проверка пользователей группы по базе данных Murix (☎️ слитых тел.номеров)
+    async def mchcmd(self, message: Message):
+        """Проверка пользователей группы по базе данных Murix (☎️ слитых тел. номеров)
 
         """
         chatid = utils.get_chat_id(m)
