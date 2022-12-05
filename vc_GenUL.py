@@ -58,7 +58,8 @@ class GenUL(loader.Module):
         else:
             return await m.edit("<b>Ошибка:</b> <i>Не указананы параметры!</i>")
         estimatedDosage = (x / 100) * 280.059565 * (math.pow(n, -0.412565956))
-        newAmount = ((estimatedDosage < x) ? x : estimatedDosage)
+        newAmount = estimatedDosage
+        if estimatedDosage < x: newAmount = x
         result = round(newAmount * 10) / 10
         dose = 100 #последняя доза
         days = 1 #дней с момента употребления 
