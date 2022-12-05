@@ -14,7 +14,7 @@ class GenUL(loader.Module):
     """Инструменты для работы с пользователями"""
 
     strings = {
-        'name': 'PositiveToolsBy@VacuumCleanr',
+        'name': 'PositiveTools', #By@VacuumCleanr
         "processing": (
             "<emoji document_id=5451732530048802485>⏳</emoji> <b>Работаю...</b>"
         ),
