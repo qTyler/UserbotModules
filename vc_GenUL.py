@@ -45,8 +45,8 @@ class GenUL(loader.Module):
     #        await sleep(10)
 
     async def mchcmd(self, message: Message):
-        """.
-         ╰ ☎️ Проверка пользователей группы по базе Murix (☎️ слитых тел. номеров)
+        """
+          ╰ ☎️ Проверка пользователей группы по базе Murix (☎️ слитых тел. номеров)
         """
         chatid = utils.get_chat_id(m)
         enty = self._client.get_input_entity(chatid)
@@ -92,8 +92,8 @@ class GenUL(loader.Module):
         
     @loader.unrestricted
     async def ulcmd(self, m: Message):
-        """. 
-         ╰ 📄 Gенерация списка участников для рулетки
+        """ 
+          ╰ 📄 Gенерация списка участников для рулетки
            • <reply> - нужно ответить на сообщение с которого будет начинаться парсинг пользователей
            • [max_users] - максимальное количество пользователей в списке, по умолчанию: 100
            #Пример, список на 25 чел: .ul 25 
@@ -127,10 +127,8 @@ class GenUL(loader.Module):
         if not reply: return await m.edit("бля")
         else:
             c = 0
-            lastmsg = []
             async for msg in m.client.iter_messages(chatid, offset_id = reply.id, reverse=True, limit = 400):
                 if max_users == c: break
-                lastmsg = msg
                 try:
                     if str(msg.text).lower() in symbols_add:
                         user = get_display_name(msg.sender)
