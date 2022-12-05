@@ -47,7 +47,7 @@ class GenUL(loader.Module):
     
     async def mchcmd(self, message: Message):
         """ - Проверка пользователей группы по базе Murix (☎️ слитых тел. номеров)"""
-        chatid = utils.get_chat_id(m)
+        chatid = utils.get_chat_id(message)
         enty = self._client.get_input_entity(chatid)
         if message.is_private:
             await utils.answer(message, self.strings("no_pm"))
