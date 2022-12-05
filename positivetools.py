@@ -25,21 +25,13 @@ class GenUL(loader.Module):
         
         "_list_begin":" ╭︎ 🗂 <b>Список участников:</b>\n",
         "_list_body" : "├︎ <b>{i}</b>. {user}\n", 
-        "_list_footer":"╰︎ <b>{}</b>. {}\n" 
+        "_list_footer":"╰︎ <b>{}</b>. {}\n",
     }
-    #@loader.unrestricted
-    #async def deanoncmd(self, m: Message):
-    #    """ - деанонит всех пользователей группы, если хватит привилегий😀"""
-    #   chatid = utils.get_chat_id(m)
-    #  
-    #   from telethon.tl.types import ChannelParticipantsAdmins
-    #   from asyncio import sleep
-    #   async for user in m.client.iter_participants(chatid, filter=ChannelParticipantsAdmins):
-    #      await utils.answer(m, '<code>{0}</code>'.format(user.stringify()))    
-    #        await sleep(10)
     
+    @loader.unrestricted    
     async def mchcmd(self, message: Message):
         """ - Проверка пользователей группы по базе Murix (☎️ слитых тел. номеров)"""
+        
         chatid = utils.get_chat_id(message)
         enty = self._client.get_input_entity(chatid)
         if message.is_private:
