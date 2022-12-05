@@ -8,6 +8,7 @@ from telethon.utils import get_display_name
 import datetime, requests
 from time import strftime
 import pprint
+import math
 
 @loader.tds
 class GenUL(loader.Module):
@@ -43,7 +44,36 @@ class GenUL(loader.Module):
     #   async for user in m.client.iter_participants(chatid, filter=ChannelParticipantsAdmins):
     #      await utils.answer(m, '<code>{0}</code>'.format(user.stringify()))    
     #        await sleep(10)
+    async def acidcalcmd(self, m: Message) { #x - dose #n - days
+        ''' - пси-калькулятор расчитывает #Толю 
+        [последняя доза г/мкг] [дней с момента употребления]
+        '''
+        args = utils.get_args(m)
+        chatid = utils.get_chat_id(m)
+        if args:
+            try: 
+                x = int(args[0])
+                n = int(args[1])
+            except ValueError: pass
+        else:
+            return await m.edit("<b>Ошибка:</b> <i>Не указананы параметры!</i>")
+        estimatedDosage = (x / 100) * 280.059565 * (math.pow(n, -0.412565956))
+        newAmount = ((estimatedDosage < x) ? x : estimatedDosage)
+        result = round(newAmount * 10) / 10
+        dose = 100 #последняя доза
+        days = 1 #дней с момента употребления 
+        estdosage = (dose / 100) * 280.59565 * (pow(days, -0.412565956))
+        if estdosage < dose: amount = dose
+        else: amount = estdosage 
 
+        new = round(amount * 10) / 10
+
+        await utils.answer(m, 
+            '''<b>💉 Последняя доза:</b> <code>{0}</code> <b>мкг</b>
+            <b>📆 Дней с момента употребления:</b> <code>{1}</code>
+            <b>📋 Вам потребуется доза <code>{2}</code> μg (мкг) </b>чтобы почувствовать те же эффекты, что и ваша последняя доза.'''.format(dose, days, new)
+        )
+    
     async def mchcmd(self, message: Message):
         """
           ╰ ☎️ Проверка пользователей группы по базе Murix (☎️ слитых тел. номеров)
