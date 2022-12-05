@@ -33,6 +33,10 @@ class GenUL(loader.Module):
         ),
         "_cmd_doc_bulkcheck": "Проверить все участников чата на слитые номера",
         "_cls_doc": "Проверяет всех участников чата на слитые номера",
+        
+        "_list_begin":" ╭︎ 🗂 <b>Список участников:</b>\n",
+        "_list_body": "├︎ <b>{i}</b>. {user}\n", #i, user
+        "_list_footer": "╰︎ <b>{}</b>. {}\n" #i, user
     }
     #@loader.unrestricted
     #async def deanoncmd(self, m: Message):
@@ -83,18 +87,16 @@ class GenUL(loader.Module):
     async def listview(self, list):
         i = 0
         cusers = len(list)
-        listview = f' ╭︎ 🗂 <b>Список участников:</b>\n'
+        listview = self.strings("_list_begin") #f' ╭︎ 🗂 <b>Список участников:</b>\n'
         for user in list:
            i += 1
-           if cusers == i: listview += f'╰︎ <b>{i}</b>. {user}\n' # footer
-           else: listview += f'├︎ <b>{i}</b>. {user}\n' # middle 
+           if cusers == i: listview += self.strings("_list_footer").format(i, user) #f'╰︎ <b>{i}</b>. {user}\n' # footer
+           else: listview += self.strings("_list_body").format(i, user) #f'├︎ <b>{i}</b>. {user}\n' # middle 
         return listview   
         
     @loader.unrestricted
-    async def ulcmd(self, m: Message):
-        """ - Gенерация списка участников для рулетки
-           • <reply> - нужно ответить на сообщение с которого будет начинаться парсинг пользователей
-           • [max_users] - максимальное количество пользователей в списке, по умолчанию: 100
+    async def glcmd(self, m: Message):
+        """ <*reply> [max_users:int] - Gенерация списка участников для рулетки
            #Пример, список на 25 чел: .ul 25 
            
            ‼️ Для участия в отборе нужно отправить один из следующих триггеров: 
