@@ -16,27 +16,16 @@ class GenUL(loader.Module):
 
     strings = {
         'name': 'PositiveTools', #By@VacuumCleanr
-        "processing": (
-            "<emoji document_id=5451732530048802485>⏳</emoji> <b>Работаю...</b>"
-        ),
-        "no_pm": (
-            "<emoji document_id=5312526098750252863>🚫</emoji> <b>Эту команду нужно"
-            " выполнять в чате</b>"
-        ),
-        "leaked": (
-            "<emoji document_id=5465169893580086142>☎️</emoji>[<code>{}</code>] <b>Слитые номера в "
-            " чате «{}»:</b>\n\n{}"
-        ),
-        "404": (
-            "<emoji document_id=5465325710698617730>☹️</emoji> <b>Тут нет слитых"
-            " номеров</b>"
-        ),
+        "processing": ("<emoji document_id=5451732530048802485>⏳</emoji> <b>Работаю...</b>"),
+        "no_pm": ("<emoji document_id=5312526098750252863>🚫</emoji> <b>Эту команду нужно выполнять в чате</b>"),
+        "leaked": ("<emoji document_id=5465169893580086142>☎️</emoji>[<code>{}</code>] <b>Слитые номера в чате «{}»:</b>\n\n{}"),
+        "404": ("<emoji document_id=5465325710698617730>☹️</emoji> <b>Тут нет слитых номеров</b>"),
         "_cmd_doc_bulkcheck": "Проверить все участников чата на слитые номера",
         "_cls_doc": "Проверяет всех участников чата на слитые номера",
         
         "_list_begin":" ╭︎ 🗂 <b>Список участников:</b>\n",
-        "_list_body": "├︎ <b>{i}</b>. {user}\n", #i, user
-        "_list_footer": "╰︎ <b>{}</b>. {}\n" #i, user
+        "_list_body" : "├︎ <b>{i}</b>. {user}\n", 
+        "_list_footer":"╰︎ <b>{}</b>. {}\n" 
     }
     #@loader.unrestricted
     #async def deanoncmd(self, m: Message):
@@ -57,7 +46,7 @@ class GenUL(loader.Module):
             await utils.answer(message, self.strings("no_pm"))
             return
 
-        await self._client.send_message("me", pprint.pprint(enty))
+        await self._client.send_message("me", str(enty))
         message = await utils.answer(message, self.strings("processing"))
 
         results = []
