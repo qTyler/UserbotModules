@@ -44,7 +44,7 @@ class GenUL(loader.Module):
     #   async for user in m.client.iter_participants(chatid, filter=ChannelParticipantsAdmins):
     #      await utils.answer(m, '<code>{0}</code>'.format(user.stringify()))    
     #        await sleep(10)
-    async def acidcalcmd(self, m: Message) { #x - dose #n - days
+    async def acidcalcmd(self, m: Message): #x - dose #n - days
         ''' - пси-калькулятор расчитывает #Толю 
         [последняя доза г/мкг] [дней с момента употребления]
         '''
