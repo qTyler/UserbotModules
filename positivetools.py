@@ -17,6 +17,7 @@ class GenUL(loader.Module):
     strings = {
         "error_no_pm": "<b>[UserBot]</b> Это не чат",
         "errr_no_reply": "<b>[UserBot]</b> Не тупи, никакой это не ответ :)",
+        "no_rank": "Аноним без должности",
         "_list_begin":" ╭︎ 🗂 <b>Список участников:</b>\n",
         "_list_body" : "├︎ <b>{}</b>. {}\n", 
         "_list_footer":"╰︎ <b>{}</b>. {}\n",
@@ -85,6 +86,6 @@ class GenUL(loader.Module):
                 except TypeError: continue
                 except NameError:
                     c += 1
-                    usrlist.append('* Аноним без должности')
+                    usrlist.append(self.strings("no_rank"))
                 
         await utils.answer(m, await self.listview(usrlist))
