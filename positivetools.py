@@ -7,24 +7,37 @@ from telethon.tl.types import Message
 from telethon.utils import get_display_name
 import datetime, requests
 from time import strftime
-import pprint
-import math
 
 @loader.tds
 class GenUL(loader.Module):
     """Инструменты для раздачи халявы"""
 
     strings = {
+        "name": "Distribution Tools",
         "error_no_pm": "<b>[UserBot]</b> Это не чат",
         "errr_no_reply": "<b>[UserBot]</b> Не тупи, никакой это не ответ :)",
-        "no_rank": "Аноним без должности",
-        "_list_begin":" ╭︎ 🗂 <b>Список участников:</b>\n",
-        "_list_body" : "├︎ <b>{}</b>. {}\n", 
-        "_list_footer":"╰︎ <b>{}</b>. {}\n",
+        "no_rank": "Anonymous #NO_RANK",
+        "_list_begin":" ╭ 🗂 <b>Список участников:</b>\n",
+        "_list_body" : "├ <b>{}</b>. {}\n", 
+        "_list_footer":"╰ <b>{}</b>. {}\n",
     }
+    
+    usrlist = [ ]
+    max_users = 100
+    symbols_add = [
+            '+',
+            'plus',
+            'плюс',
+            '➕',
+            '👍',
+            '✔️',
+            '✅',
+            '☑️'
+    ]
    
-    async def listview(self, list):
+    async def listview(self,):
         i = 0
+        list = self.usrlist
         cusers = len(list)
         listview = self.strings("_list_begin")
         for user in list:
@@ -34,26 +47,13 @@ class GenUL(loader.Module):
         return listview   
         
     @loader.unrestricted
-    async def ggcmd(self, m: Message):
+    async def pulcmd(self, m: Message):
         """ <*reply> [max_users:int] - Gенерация списка участников для рулетки
            Пример генерации списока на 25 чел: .ul 25 
            
            ‼️ Для участия в отборе нужно отправить один из следующих триггеров: 
              «+», «plus», «плюс», «➕», «👍», «✔️», «✅», «☑️»
         """        
-        max_users = 100 #default
-        symbols_add = [
-            '+',
-            'plus',
-            'плюс',
-            '➕',
-            '👍',
-            '✔️',
-            '✅',
-            '☑️'
-        ]
-          
-        usrlist = []
         args = utils.get_args(m)
         chatid = utils.get_chat_id(m)
         if args:
@@ -68,9 +68,9 @@ class GenUL(loader.Module):
         else:
             c = 0
             async for msg in m.client.iter_messages(chatid, offset_id = reply.id, reverse=True, limit = 400):
-                if max_users == c: break
+                if self.max_users == c: break
                 try:
-                    if str(msg.text).lower() in symbols_add:
+                    if str(msg.text).lower() in self.symbols_add:
                         user = get_display_name(msg.sender)
                         if msg.sender == None:
                             user = msg.post_author
@@ -78,14 +78,14 @@ class GenUL(loader.Module):
                         else:
                             uid = msg.sender.id
                         if not user: user = m.chat.title
-                        if not user in usrlist:
+                        if not user in self.usrlist:
                             c += 1 
-                            usrlist.append(user)
+                            self.usrlist.append(user)
                             
                 except AttributeError: continue
                 except TypeError: continue
                 except NameError:
                     c += 1
-                    usrlist.append(self.strings("no_rank"))
+                    self.usrlist.append(self.strings("no_rank"))
                 
-        await utils.answer(m, await self.listview(usrlist))
+        await utils.answer(m, await self.listview())
