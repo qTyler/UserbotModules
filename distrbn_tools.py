@@ -15,7 +15,7 @@ class GenUL(loader.Module):
     """Инструменты для раздачи халявы"""
 
     strings = {
-        "name": "#DistributionTools",
+        "name": "DistributionTools",
         "error_no_pm": "<b>[UserBot]</b> Это не чат",
         "errr_no_reply": "<b>[UserBot]</b> Не тупи, никакой это не ответ :)",
         "no_rank": "Аноним без должности",
