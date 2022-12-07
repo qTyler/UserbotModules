@@ -9,6 +9,7 @@ import datetime, requests
 from time import strftime
 import pprint
 import math
+from ..inline.types import InlineQuery
 
 @loader.tds
 class GenUL(loader.Module):
@@ -47,7 +48,20 @@ class GenUL(loader.Module):
            if cusers == i: listview += self.strings("_list_footer").format(i, user)
            else: listview += self.strings("_list_body").format(i, user)
         return listview   
-        
+
+
+    @loader.sudo
+    async def city_inline_handler(self, query: InlineQuery):
+         """[Менеджер адресов] Выбрать город """
+         # Process request query.args
+         pass
+
+    @loader.sudo
+    async def staff_inline_handler(self, query: InlineQuery):
+         """[Менеджер адресов] Наименование товара """
+         # Process request query.args
+         pass
+
     @loader.unrestricted
     async def pulcmd(self, m: Message):
         """ <*reply> [max_users:int] - Gенерация списка участников для рулетки
