@@ -51,7 +51,7 @@ class GenUL(loader.Module):
 
 
     @loader.sudo
-    async def city_inline_handler(self, query: InlineQuery):
+    async def setCity_inline_handler(self, query: InlineQuery):
          """[Менеджер адресов] Выбрать город """
          # Process request query.args
          pass
